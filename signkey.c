@@ -564,14 +564,14 @@ static char * sign_key_sha1_fingerprint(const unsigned char* keyblob,
 
 	sha1_done(&hs, hash);
 
-	/* "sha1!! hexfingerprinthere\0", each hex digit is "AB:" etc */
-	buflen = 7 + 3*SHA1_HASH_SIZE;
+	/* "sha1 hexfingerprinthere\0", each hex digit is "AB:" etc */
+	buflen = 5 + 3*SHA1_HASH_SIZE;
 	ret = (char*)m_malloc(buflen);
 
 	strcpy(ret, "sha1 ");
 
 	for (i = 0; i < SHA1_HASH_SIZE; i++) {
-		unsigned int pos = 7 + 3*i;
+		unsigned int pos = 5 + 3*i;
 		ret[pos] = hexdig(hash[i] >> 4);
 		ret[pos+1] = hexdig(hash[i] & 0x0f);
 		ret[pos+2] = ':';
